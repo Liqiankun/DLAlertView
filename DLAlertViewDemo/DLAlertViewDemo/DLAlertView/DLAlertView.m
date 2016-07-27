@@ -8,22 +8,29 @@
 
 #import "DLAlertView.h"
 
-#define ImageViewWidthRatio 0.76
-#define ImageViewWidhtHeightRatio 0.74
+#define contentViewWidthRatio 0.76
+#define contentViewWidhtHeightRatio 0.74
 
 #define viewHeight [UIScreen mainScreen].bounds.size.height
 #define viewWidth [UIScreen mainScreen].bounds.size.width
+#define contentViewWidth (viewWidth * contentViewWidthRatio)
+#define contentViewHeight (contentViewWidth / contentViewWidhtHeightRatio)
+#define contentViewX (viewWidth - contentViewWidth)/2
+#define closeButtonWidthHeight  40
+#define closeButtonX  (viewWidth - closeButtonWidthHeight) / 2
 
 typedef void (^Completion)();
 
 @interface DLAlertView ()
 
 @property(nonatomic,strong)UIWindow *alterViewWindow;
+@property(nonatomic,strong)UIView *contentView;
 @property(nonatomic,strong)UIImageView *imageView;
 @property(nonatomic,strong)UIButton *closeButton;
 @property(nonatomic,strong)UIWindow *previousWindow;
 
 -(void)dl_setupNewWindow;
+-(void)dl_setupContentView;
 -(void)dl_setupImageView;
 -(void)dl_setupCloseButton;
 -(void)dl_setupViewColor:(UIColor *)color completion:(Completion)completion;
@@ -39,6 +46,7 @@ typedef void (^Completion)();
 {
     if (self = [super init]) {
         [self dl_setupNewWindow];
+        [self dl_setupContentView];
         [self dl_setupImageView];
         [self dl_setupCloseButton];
         
@@ -60,6 +68,13 @@ typedef void (^Completion)();
     self.alterViewWindow = alertWindow;
 }
 
+-(void)dl_setupContentView
+{
+    UIView *contentView = [[UIView alloc] init];
+    self.contentView = contentView;
+    [self.view addSubview:self.contentView];
+}
+
 -(void)dl_setupImageView
 {
     UIImageView *imageView = [[UIImageView alloc] init];
@@ -71,7 +86,7 @@ typedef void (^Completion)();
     imageView.userInteractionEnabled = YES;
     [imageView addGestureRecognizer:tapGresture];
     self.imageView = imageView;
-    [self.view addSubview:self.imageView];
+    [self.contentView addSubview:self.imageView];
 }
 
 -(void)dl_setupCloseButton
@@ -97,18 +112,12 @@ typedef void (^Completion)();
 -(void)dl_subViewsShowAnimation
 {
     CGFloat marginWidth = 20;
+  
     
-    CGFloat imageViewWidth = viewWidth * ImageViewWidthRatio;
-    CGFloat imageViewHeight = imageViewWidth / ImageViewWidhtHeightRatio;
-    CGFloat imageViewX = (viewWidth - imageViewWidth)/2;
-    
-    CGFloat closeButtonWidthHeight = 40;
-    CGFloat closeButtonX = (viewWidth - closeButtonWidthHeight) / 2;
-    
-    CGFloat subViewSpaceWidth = (viewHeight - marginWidth - imageViewHeight - closeButtonWidthHeight) / 2;
+    CGFloat subViewSpaceWidth = (viewHeight - marginWidth - contentViewHeight - closeButtonWidthHeight) / 2;
     
     [UIView animateWithDuration:0.4 delay:0.0 usingSpringWithDamping:0.7 initialSpringVelocity:5.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.imageView.frame = CGRectMake(imageViewX, subViewSpaceWidth, imageViewWidth, imageViewHeight);
+        self.contentView.frame = CGRectMake(contentViewX, subViewSpaceWidth, contentViewWidth, contentViewHeight);
     } completion:^(BOOL finished) {
         
     }];
@@ -122,17 +131,13 @@ typedef void (^Completion)();
 
 -(void)dl_subViewsCloseAnimationWithcompletion:(Completion)completion
 {
-    CGFloat imageViewWidth = viewWidth * ImageViewWidthRatio;
-    CGFloat imageViewHeight = imageViewWidth / ImageViewWidhtHeightRatio;
-    CGFloat imageViewX = (viewWidth - imageViewWidth)/2;
-    CGFloat imageViewY = imageViewHeight;
+
+    CGFloat contentViewY = contentViewHeight;
     
-    CGFloat closeButtonWidthHeight = 40;
-    CGFloat closeButtonX = (viewWidth - closeButtonWidthHeight) / 2;
     CGFloat closeButtonY = viewHeight;
     
     [UIView animateWithDuration:0.5 delay:0.0 usingSpringWithDamping:0.7 initialSpringVelocity:8.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.imageView.frame = CGRectMake(imageViewX, -imageViewY, imageViewWidth, imageViewHeight);
+        self.contentView.frame = CGRectMake(contentViewX, -contentViewY, contentViewWidth, contentViewHeight);
     } completion:^(BOOL finished) {
         if (completion) {
             completion();
@@ -197,6 +202,7 @@ typedef void (^Completion)();
     }];
 }
 
+#pragma mark - SuperMethod
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -205,14 +211,13 @@ typedef void (^Completion)();
 {
     [super viewWillLayoutSubviews];
     
-    CGFloat imageViewWidth = viewWidth * ImageViewWidthRatio;
-    CGFloat imageViewHeight = imageViewWidth / ImageViewWidhtHeightRatio;
-    CGFloat imageViewX = (viewWidth - imageViewWidth)/2;
-    CGFloat imageViewY = imageViewHeight;
-    self.imageView.frame = CGRectMake(imageViewX, -imageViewY, imageViewWidth, imageViewHeight);
+    CGFloat contentViewY = contentViewHeight;
+    self.contentView.frame = CGRectMake(contentViewX, -contentViewY, contentViewWidth, contentViewHeight);
     
-    CGFloat closeButtonWidthHeight = 40;
-    CGFloat closeButtonX = (viewWidth - closeButtonWidthHeight) / 2;
+    if (self.imageView) {
+        self.imageView.frame = self.contentView.bounds;
+    }
+
     CGFloat closeButtonY = viewHeight;
     self.closeButton.frame = CGRectMake(closeButtonX, closeButtonY, closeButtonWidthHeight, closeButtonWidthHeight);
 }

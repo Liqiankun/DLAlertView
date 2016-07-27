@@ -512,6 +512,7 @@
 				AA15F9271D488AE600F1E204 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA15F9281D488AE600F1E204 /* Build configuration list for PBXNativeTarget "DLAlertViewDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +521,7 @@
 				AA15F92A1D488AE600F1E204 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA15F92B1D488AE600F1E204 /* Build configuration list for PBXNativeTarget "DLAlertViewDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +530,7 @@
 				AA15F92D1D488AE600F1E204 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
