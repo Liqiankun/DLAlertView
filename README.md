@@ -1,3 +1,4 @@
+![](https://github.com/Liqiankun/DLAlertView/raw/master/DLAlertView.png)
 ![](https://github.com/Liqiankun/DLAlertView/raw/master/DLAlertView.gif)
 #How to use
 ```oc
