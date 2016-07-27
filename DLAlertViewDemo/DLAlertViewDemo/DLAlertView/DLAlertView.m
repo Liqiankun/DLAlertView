@@ -10,8 +10,10 @@
 
 #define ImageViewWidthRatio 0.76
 #define ImageViewWidhtHeightRatio 0.74
+
 #define viewHeight [UIScreen mainScreen].bounds.size.height
 #define viewWidth [UIScreen mainScreen].bounds.size.width
+
 typedef void (^Completion)();
 
 @interface DLAlertView ()
@@ -94,7 +96,7 @@ typedef void (^Completion)();
 
 -(void)dl_subViewsShowAnimation
 {
-    CGFloat marginWidth = 0;
+    CGFloat marginWidth = 20;
     
     CGFloat imageViewWidth = viewWidth * ImageViewWidthRatio;
     CGFloat imageViewHeight = imageViewWidth / ImageViewWidhtHeightRatio;
@@ -105,14 +107,14 @@ typedef void (^Completion)();
     
     CGFloat subViewSpaceWidth = (viewHeight - marginWidth - imageViewHeight - closeButtonWidthHeight) / 2;
     
-    [UIView animateWithDuration:0.4 delay:0.0 usingSpringWithDamping:0.7 initialSpringVelocity:8.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.4 delay:0.0 usingSpringWithDamping:0.7 initialSpringVelocity:5.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.imageView.frame = CGRectMake(imageViewX, subViewSpaceWidth, imageViewWidth, imageViewHeight);
     } completion:^(BOOL finished) {
         
     }];
     
-    [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:10.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.closeButton.frame = CGRectMake(closeButtonX, viewHeight - subViewSpaceWidth, closeButtonWidthHeight, closeButtonWidthHeight);
+    [UIView animateWithDuration:0.3 delay:0.0 usingSpringWithDamping:0.5 initialSpringVelocity:5.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.closeButton.frame = CGRectMake(closeButtonX, viewHeight - subViewSpaceWidth - closeButtonWidthHeight, closeButtonWidthHeight, closeButtonWidthHeight);
     } completion:^(BOOL finished) {
         
     }];
