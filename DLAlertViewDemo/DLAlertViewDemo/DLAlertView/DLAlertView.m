@@ -154,8 +154,8 @@ typedef void (^Completion)();
 -(void)dl_clickViewsHideAnimation
 {
     [UIView animateWithDuration:0.5 animations:^{
-        self.imageView.alpha = 0.0;
-        self.closeButton.alpha = 0;
+        self.contentView.alpha = 0.0;
+        self.closeButton.alpha = 0.0;
     }];
 
 }
