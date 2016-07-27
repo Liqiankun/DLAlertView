@@ -26,7 +26,6 @@
     } andCloseCallBack:^{
         NSLog(@"CloseCallBack");
     }];
-    
     [alertView show];
 }
 
