@@ -1,5 +1,4 @@
 ![](https://github.com/Liqiankun/DLAlertView/raw/master/DLAlertView.png)
-![](https://github.com/Liqiankun/DLAlertView/raw/master/DLAlertView.gif)
 #How to use
 ```oc
    DLAlertView *alertView = [[DLAlertView alloc] initWithNewWindowWithClickCallBack:^{
@@ -9,3 +8,4 @@
     }];
     [alertView show];
 ```
+![](https://github.com/Liqiankun/DLAlertView/raw/master/DLAlertView.gif)
