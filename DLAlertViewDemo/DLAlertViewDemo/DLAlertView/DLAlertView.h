@@ -15,6 +15,8 @@ typedef void(^ClickCallBack)();
 
 @property(nonatomic,copy)CloseCallBack closeCallBack;
 @property(nonatomic,copy)ClickCallBack clickCallBack;
+
 -(instancetype)initWithNewWindowWithClickCallBack:(ClickCallBack)clickCallBack andCloseCallBack:(CloseCallBack)closeCallBack;
 -(void)show;
+
 @end

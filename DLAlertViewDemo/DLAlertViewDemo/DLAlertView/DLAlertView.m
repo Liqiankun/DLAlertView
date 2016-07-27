@@ -7,10 +7,13 @@
 //
 
 #import "DLAlertView.h"
+
 #define ImageViewWidthRatio 0.76
 #define ImageViewWidhtHeightRatio 0.74
-
+#define viewHeight [UIScreen mainScreen].bounds.size.height
+#define viewWidth [UIScreen mainScreen].bounds.size.width
 typedef void (^Completion)();
+
 @interface DLAlertView ()
 
 @property(nonatomic,strong)UIWindow *alterViewWindow;
@@ -25,6 +28,7 @@ typedef void (^Completion)();
 -(void)dl_subViewsShowAnimation;
 -(void)dl_subViewsCloseAnimationWithcompletion:(Completion)completion;
 -(void)dl_clickViewsHideAnimation;
+
 @end
 
 @implementation DLAlertView
@@ -90,9 +94,6 @@ typedef void (^Completion)();
 
 -(void)dl_subViewsShowAnimation
 {
- 
-    CGFloat viewHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat viewWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat marginWidth = 0;
     
     CGFloat imageViewWidth = viewWidth * ImageViewWidthRatio;
@@ -119,9 +120,6 @@ typedef void (^Completion)();
 
 -(void)dl_subViewsCloseAnimationWithcompletion:(Completion)completion
 {
-    CGFloat viewHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat viewWidth = [UIScreen mainScreen].bounds.size.width;
-    
     CGFloat imageViewWidth = viewWidth * ImageViewWidthRatio;
     CGFloat imageViewHeight = imageViewWidth / ImageViewWidhtHeightRatio;
     CGFloat imageViewX = (viewWidth - imageViewWidth)/2;
@@ -204,9 +202,6 @@ typedef void (^Completion)();
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
-    CGFloat viewHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat viewWidth = [UIScreen mainScreen].bounds.size.width;
     
     CGFloat imageViewWidth = viewWidth * ImageViewWidthRatio;
     CGFloat imageViewHeight = imageViewWidth / ImageViewWidhtHeightRatio;
