@@ -118,6 +118,7 @@ typedef void (^Completion)();
 -(void)dl_setupContentView
 {
     UIView *contentView = [[UIView alloc] init];
+    contentView.backgroundColor = [UIColor whiteColor];
     self.contentView = contentView;
     [self.view addSubview:self.contentView];
 }
@@ -139,13 +140,12 @@ typedef void (^Completion)();
 -(void)dl_setupTextViewWithText:(NSString *)text font:(UIFont *)font textColor:(UIColor *)textColor
 {
     UITextView *textView = [[UITextView alloc] init];
-    textView.backgroundColor = [UIColor clearColor];
+    textView.backgroundColor = [UIColor whiteColor];
     textView.editable = NO;
     textView.selectable = NO;
     textView.text = text;
     textView.font = font;
     self.textFont = font;
-    textView.layer.cornerRadius = 5;
     textView.textColor = textColor;
     self.textViewText = text;
     self.textView = textView;
@@ -245,7 +245,8 @@ typedef void (^Completion)();
 
 -(void)dl_configTextView
 {
-    self.contentViewHeight = ([self dl_getTextViewSize].height > self.contentViewHeight ? self.contentViewHeight : [self dl_getTextViewSize].height);
+    CGFloat textStringHeight = [self dl_getTextViewSize].height + 2 * self.textViewMargin;
+    self.contentViewHeight = (textStringHeight > self.contentViewHeight ? self.contentViewHeight :textStringHeight);
     self.subViewSpaceWidth =  (viewHeight - self.marginWidth - self.contentViewHeight - self.closeButtonWidthHeight) / 2;
     self.contentView.frame = CGRectMake(self.contentViewX, -self.contentViewHeight, self.contentViewWidth, self.contentViewHeight);
 }

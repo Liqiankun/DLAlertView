@@ -18,19 +18,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPk-r1-hxU">
-                                <rect key="frame" x="296" y="308" width="74" height="30"/>
+                                <rect key="frame" x="263" y="285" width="74" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="74" id="9Tq-zZ-eHB"/>
+                                    <constraint firstAttribute="height" constant="30" id="x0c-0S-EmD"/>
+                                </constraints>
                                 <state key="normal" title="ImageVeiw"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="9Tq-zZ-eHB"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="imageView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mg0-Aw-0so"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bhj-WX-ajJ">
-                                <rect key="frame" x="269" y="256" width="62" height="29"/>
+                                <rect key="frame" x="140" y="286" width="62" height="29"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="62" id="7Ua-he-08i"/>
-                                    <constraint firstAttribute="height" constant="29" id="SlP-KK-EGe"/>
+                                    <constraint firstAttribute="width" constant="62" id="K9Z-dw-7OY"/>
+                                    <constraint firstAttribute="height" constant="29" id="mOC-fk-BLZ"/>
                                 </constraints>
                                 <state key="normal" title="TextView"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="K9Z-dw-7OY"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="textView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qud-Mj-PEz"/>
                                 </connections>
@@ -38,16 +52,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="YPk-r1-hxU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="296" id="CXv-yn-zSz"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YPk-r1-hxU" secondAttribute="bottom" constant="262" id="EQB-sN-eyC"/>
-                            <constraint firstItem="YPk-r1-hxU" firstAttribute="top" secondItem="Bhj-WX-ajJ" secondAttribute="bottom" constant="23" id="pU4-3e-XzK"/>
-                            <constraint firstItem="Bhj-WX-ajJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qU2-Qb-xXz"/>
+                            <constraint firstItem="YPk-r1-hxU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gs0-jD-qN1"/>
+                            <constraint firstItem="YPk-r1-hxU" firstAttribute="leading" secondItem="Bhj-WX-ajJ" secondAttribute="trailing" constant="61" id="jL4-Xa-YmD"/>
+                            <constraint firstItem="YPk-r1-hxU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nQr-1v-F2T"/>
+                            <constraint firstItem="YPk-r1-hxU" firstAttribute="leading" secondItem="Bhj-WX-ajJ" secondAttribute="trailing" constant="61" id="pOX-P1-kVX"/>
+                            <constraint firstItem="Bhj-WX-ajJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wwK-Gh-9vA"/>
+                            <constraint firstItem="Bhj-WX-ajJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yLd-JO-Sef"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="wwK-Gh-9vA"/>
+                                <exclude reference="pOX-P1-kVX"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="511" y="426"/>
+            <point key="canvasLocation" x="520" y="402"/>
         </scene>
     </scenes>
 </document>
