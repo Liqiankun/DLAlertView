@@ -89,6 +89,7 @@ typedef void (^Completion)();
         self.closeCallBack = closeCallBack;
         
         self.view.backgroundColor = [UIColor clearColor];
+        self.automaticallyAdjustsScrollViewInsets = NO;
     }
     return self;
 }
@@ -119,6 +120,9 @@ typedef void (^Completion)();
 {
     UIView *contentView = [[UIView alloc] init];
     contentView.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *tapGresture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapAction)];
+    contentView.userInteractionEnabled = YES;
+    [contentView addGestureRecognizer:tapGresture];
     self.contentView = contentView;
     [self.view addSubview:self.contentView];
 }
@@ -130,9 +134,7 @@ typedef void (^Completion)();
     imageView.image = image;
     imageView.clipsToBounds = YES;
     imageView.layer.cornerRadius = 5;
-    UITapGestureRecognizer *tapGresture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapAction)];
     imageView.userInteractionEnabled = YES;
-    [imageView addGestureRecognizer:tapGresture];
     self.imageView = imageView;
     [self.contentView addSubview:self.imageView];
 }
@@ -143,12 +145,21 @@ typedef void (^Completion)();
     textView.backgroundColor = [UIColor whiteColor];
     textView.editable = NO;
     textView.selectable = NO;
+    textView.textAlignment = NSTextAlignmentNatural;
     textView.text = text;
     textView.font = font;
-    self.textFont = font;
     textView.textColor = textColor;
+    self.textFont = font;
+    textView.contentInset = UIEdgeInsetsZero;
+    textView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    textView.contentOffset = CGPointZero;
+    textView.textContainerInset = UIEdgeInsetsZero;
+    textView.textContainer.lineFragmentPadding = 0;
+    textView.showsVerticalScrollIndicator = NO;
+    textView.userInteractionEnabled = YES;
     self.textViewText = text;
     self.textView = textView;
+    
     [self.contentView addSubview:self.textView];
 }
 
@@ -212,7 +223,7 @@ typedef void (^Completion)();
 -(void)dl_clickViewsHideAnimation
 {
     [UIView animateWithDuration:0.5 animations:^{
-        self.contentView.backgroundColor = [UIColor clearColor];
+        self.contentView.alpha = 0.0;
         self.closeButton.alpha = 0.0;
     }];
 
@@ -221,9 +232,10 @@ typedef void (^Completion)();
 -(CGSize)dl_getTextViewSize
 {
     CGSize size =  [self.textViewText stringSizeWithFont:self.textFont withMaxWidth:self.contentViewWidth -  2 * self.textViewMargin];
-    if (size.height > self.contentViewHeight) {
+    CGFloat  textStringHeight = size.height;
+    if (textStringHeight > self.contentViewHeight) {
         self.textView.scrollEnabled = YES;
-        return CGSizeMake(size.width, self.contentViewHeight);
+        return CGSizeMake(size.width, self.contentViewHeight -  2 * self.textViewMargin);
     }
     self.textView.scrollEnabled = NO;
     return size;
@@ -297,8 +309,9 @@ typedef void (^Completion)();
         self.contentView.frame = CGRectMake(self.contentViewX, -contentViewY, self.contentViewWidth, self.contentViewHeight);
         self.imageView.frame = self.contentView.bounds;
     }else if(self.textView){
-        [self dl_configTextView];
+        [self.textView setContentOffset:CGPointZero animated:NO];
         self.textView.frame = (CGRect){{self.textViewMargin, self.textViewMargin}, [self dl_getTextViewSize]};
+        [self dl_configTextView];
     }
 }
 
