@@ -16,7 +16,8 @@ typedef void(^ClickCallBack)();
 @property(nonatomic,copy)CloseCallBack closeCallBack;
 @property(nonatomic,copy)ClickCallBack clickCallBack;
 
--(instancetype)initWithNewWindowWithClickCallBack:(ClickCallBack)clickCallBack andCloseCallBack:(CloseCallBack)closeCallBack;
+-(instancetype)initWithWithImage:(UIImage *)image clickCallBack:(ClickCallBack)clickCallBack andCloseCallBack:(CloseCallBack)closeCallBack;
+-(instancetype)initWithWithText:(NSString *)text font:(UIFont *)font textColor:(UIColor *)textColor clickCallBack:(ClickCallBack)clickCallBack andCloseCallBack:(CloseCallBack)closeCallBack;
 -(void)show;
 
 @end

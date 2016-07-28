@@ -18,17 +18,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
+- (IBAction)imageView:(id)sender {
+        DLAlertView *alertView = [[DLAlertView alloc] initWithWithImage:[UIImage imageNamed:@"typewriter"] clickCallBack:^{
+            NSLog(@"clickCallBack");
+        } andCloseCallBack:^{
+            NSLog(@"andCloseCallBack");
+        }];
+        [alertView show];
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    DLAlertView *alertView = [[DLAlertView alloc] initWithNewWindowWithClickCallBack:^{
-        NSLog(@"ClickCallBack");
+}
+- (IBAction)textView:(id)sender {
+    DLAlertView * alertView = [[DLAlertView alloc] initWithWithText:@"感谢您的支持，您将以众筹专享价258元获得市场价199元/件的专业抗菌FT-Shirt四件（男女款、尺码、颜色和数量请在备注中注明需求，男款尺码M/L/XL/XXL/XXXL，女款尺码S/M/L/XL，颜色：黑色/橙色/墨绿/水蓝/）。科技面料，专业抗菌，穿FT-Shirt，清爽一夏。感谢您的支持，您将以众筹专享价258元获得市场价199元/件的专业抗菌FT-Shirt。" font:[UIFont boldSystemFontOfSize:17] textColor:[UIColor lightGrayColor] clickCallBack:^{
+        
     } andCloseCallBack:^{
-        NSLog(@"CloseCallBack");
+        
     }];
     
     [alertView show];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

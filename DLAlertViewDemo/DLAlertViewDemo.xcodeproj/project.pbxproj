@@ -16,6 +16,7 @@
 		AA15F9161D488AE600F1E204 /* DLAlertViewDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA15F9151D488AE600F1E204 /* DLAlertViewDemoTests.m */; };
 		AA15F9211D488AE600F1E204 /* DLAlertViewDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA15F9201D488AE600F1E204 /* DLAlertViewDemoUITests.m */; };
 		AA15F9311D488B1D00F1E204 /* DLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA15F9301D488B1D00F1E204 /* DLAlertView.m */; };
+		AA15F9381D48F05700F1E204 /* NSString+SIZEOFSTRING.m in Sources */ = {isa = PBXBuildFile; fileRef = AA15F9371D48F05700F1E204 /* NSString+SIZEOFSTRING.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		AA15F9221D488AE600F1E204 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA15F92F1D488B1D00F1E204 /* DLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLAlertView.h; sourceTree = "<group>"; };
 		AA15F9301D488B1D00F1E204 /* DLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLAlertView.m; sourceTree = "<group>"; };
+		AA15F9361D48F05700F1E204 /* NSString+SIZEOFSTRING.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SIZEOFSTRING.h"; sourceTree = "<group>"; };
+		AA15F9371D48F05700F1E204 /* NSString+SIZEOFSTRING.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SIZEOFSTRING.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,8 @@
 			children = (
 				AA15F92F1D488B1D00F1E204 /* DLAlertView.h */,
 				AA15F9301D488B1D00F1E204 /* DLAlertView.m */,
+				AA15F9361D48F05700F1E204 /* NSString+SIZEOFSTRING.h */,
+				AA15F9371D48F05700F1E204 /* NSString+SIZEOFSTRING.m */,
 			);
 			path = DLAlertView;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA15F9381D48F05700F1E204 /* NSString+SIZEOFSTRING.m in Sources */,
 				AA15F9031D488AE600F1E204 /* ViewController.m in Sources */,
 				AA15F9311D488B1D00F1E204 /* DLAlertView.m in Sources */,
 				AA15F9001D488AE600F1E204 /* AppDelegate.m in Sources */,
