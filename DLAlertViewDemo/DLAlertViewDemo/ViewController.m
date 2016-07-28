@@ -28,7 +28,7 @@
 
 }
 - (IBAction)textView:(id)sender {
-    DLAlertView * alertView = [[DLAlertView alloc] initWithWithText:@"感谢您的支持，您将以众筹专享价258元获得市场价199元/件的专业抗菌四件（男女款、尺码、颜色和数量请在备注中注明需求，男款尺码，女款，颜色：黑色/橙色/墨绿/水蓝/）。科技面料，专业抗菌，穿，清爽一夏。感谢您的支持，您将以众筹专享技面料，专业抗菌，穿，清爽一夏。感谢您的支持，您将以众筹专享价258元获得市场价199元/件的专业抗菌。感谢您的支持，您将以众筹专享技面料，专业抗菌，穿，清爽一夏。感谢您的支持，您将以众筹专享价258元获得市场价199元/件的专业抗菌。" font:[UIFont boldSystemFontOfSize:17] textColor:[UIColor lightGrayColor] clickCallBack:^{
+    DLAlertView * alertView = [[DLAlertView alloc] initWithWithText:@"一" font:[UIFont systemFontOfSize:16] textColor:[UIColor lightGrayColor] clickCallBack:^{
         
     } andCloseCallBack:^{
         
