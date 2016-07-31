@@ -153,8 +153,8 @@ typedef void (^Completion)();
 {
     UIPageControl *pageControl = [[UIPageControl alloc] init];
     pageControl.numberOfPages = images.count;
-    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-    pageControl.pageIndicatorTintColor = [UIColor greenColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor cyanColor];
+    pageControl.pageIndicatorTintColor = [UIColor grayColor];
     self.pageControl = pageControl;
     
     self.imageViewArray = [[NSMutableArray alloc] init];
@@ -168,10 +168,11 @@ typedef void (^Completion)();
         id image = images[i];
         UIImageView *imageView = [[UIImageView alloc] init];
         if ([image isKindOfClass:[NSString class]]) {
-            //[imageView sd_setImageWithURL:[NSURL URLWithString:image]];
             imageView.image = [UIImage imageNamed:image];
-        }else{
+        }else if([image isKindOfClass:[UIImage class]]){
             imageView.image = image;
+        }else if([image isKindOfClass:[NSURL class]]){
+            [imageView sd_setImageWithURL:image];
         }
         [self.imageViewArray addObject:imageView];
         [scrollView addSubview:imageView];
