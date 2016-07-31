@@ -8,27 +8,25 @@
 
 #import "DLAlertView.h"
 #import "NSString+SIZEOFSTRING.h"
+#import "UIImageView+WebCache.h"
 #define contentViewWidthRatio 0.76
 #define contentViewWidhtHeightRatio 0.74
 
 #define viewHeight [UIScreen mainScreen].bounds.size.height
 #define viewWidth [UIScreen mainScreen].bounds.size.width
-//#define contentViewWidth (viewWidth * contentViewWidthRatio)
-//#define contentViewHeight (contentViewWidth / contentViewWidhtHeightRatio)
-//#define contentViewX (viewWidth - contentViewWidth)/2
-//#define closeButtonWidthHeight  40
-//#define closeButtonX  (viewWidth - closeButtonWidthHeight) / 2
-//#define textViewMargin 10
 
 typedef void (^Completion)();
 
-@interface DLAlertView ()
+@interface DLAlertView ()<UIScrollViewDelegate>
 
 @property(nonatomic,strong)UIWindow *alterViewWindow;
 @property(nonatomic,strong)UIWindow *previousWindow;
 @property(nonatomic,strong)UITextView *textView;
 @property(nonatomic,strong)UIView *contentView;
 @property(nonatomic,strong)UIImageView *imageView;
+@property(nonatomic,strong)UIScrollView *scrollView;
+@property(nonatomic,strong)UIPageControl *pageControl;
+@property(nonatomic,strong)NSMutableArray<UIImageView *> *imageViewArray;
 @property(nonatomic,strong)UIButton *closeButton;
 @property(nonatomic,copy)NSString *textViewText;
 @property(nonatomic,strong)UIFont *textFont;
@@ -46,6 +44,7 @@ typedef void (^Completion)();
 -(void)dl_setupFrameNumber;
 -(void)dl_setupContentView;
 -(void)dl_setupImageViewWithImage:(UIImage *)image;
+-(void)dl_setupScrollViewWithImages:(NSArray *)images;
 -(void)dl_setupTextViewWithText:(NSString *)text font:(UIFont *)font textColor:(UIColor *)textColor;
 -(void)dl_setupCloseButton;
 -(void)dl_setupViewColor:(UIColor *)color completion:(Completion)completion;
@@ -55,6 +54,7 @@ typedef void (^Completion)();
 
 -(CGSize)dl_getTextViewSize;
 -(void)dl_configTextView;
+-(void)dl_configScrollView;
 @end
 
 @implementation DLAlertView
@@ -72,7 +72,27 @@ typedef void (^Completion)();
         self.closeCallBack = closeCallBack;
         
         self.view.backgroundColor = [UIColor clearColor];
+        self.view.backgroundColor = [UIColor clearColor];
     }
+    return self;
+}
+
+-(instancetype)initWithWithImages:(NSArray *)images clickCallBack:(ClickCallBack)clickCallBack andCloseCallBack:(CloseCallBack)closeCallBack
+{
+    if (self  = [super init]) {
+        [self dl_setupNewWindow];
+        [self dl_setupFrameNumber];
+        [self dl_setupContentView];
+        [self dl_setupScrollViewWithImages:images];
+        [self dl_setupCloseButton];
+        
+        self.clickCallBack = clickCallBack;
+        self.closeCallBack = closeCallBack;
+        
+        self.view.backgroundColor = [UIColor clearColor];
+        self.view.backgroundColor = [UIColor clearColor];
+    }
+    
     return self;
 }
 
@@ -127,6 +147,40 @@ typedef void (^Completion)();
     [contentView addGestureRecognizer:tapGresture];
     self.contentView = contentView;
     [self.view addSubview:self.contentView];
+}
+
+-(void)dl_setupScrollViewWithImages:(NSArray *)images
+{
+    UIPageControl *pageControl = [[UIPageControl alloc] init];
+    pageControl.numberOfPages = images.count;
+    pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+    pageControl.pageIndicatorTintColor = [UIColor greenColor];
+    self.pageControl = pageControl;
+    
+    self.imageViewArray = [[NSMutableArray alloc] init];
+    
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.delegate = self;
+    scrollView.pagingEnabled = YES;
+    scrollView.bounces = NO;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    for (int i = 0 ; i < images.count; i++) {
+        id image = images[i];
+        UIImageView *imageView = [[UIImageView alloc] init];
+        if ([image isKindOfClass:[NSString class]]) {
+            //[imageView sd_setImageWithURL:[NSURL URLWithString:image]];
+            imageView.image = [UIImage imageNamed:image];
+        }else{
+            imageView.image = image;
+        }
+        [self.imageViewArray addObject:imageView];
+        [scrollView addSubview:imageView];
+    }
+   
+    self.scrollView  = scrollView;
+    [self.contentView addSubview:self.scrollView];
+    [self.contentView addSubview:self.pageControl];
+    
 }
 
 -(void)dl_setupImageViewWithImage:(UIImage *)image
@@ -263,6 +317,19 @@ typedef void (^Completion)();
     self.contentView.frame = CGRectMake(self.contentViewX, -self.contentViewHeight, self.contentViewWidth, self.contentViewHeight);
 }
 
+-(void)dl_configScrollView
+{
+    CGFloat scrollViewWidth = self.contentViewWidth -  2 * self.textViewMargin;
+    CGFloat scrollViewHeight = self.contentViewHeight - 2 * self.textViewMargin;
+    self.scrollView.frame = CGRectMake(self.textViewMargin, self.textViewMargin,scrollViewWidth,scrollViewHeight);
+    for (int i = 0; i < self.imageViewArray.count; i++) {
+        UIImageView *imageView = self.imageViewArray[i];
+        imageView.frame = CGRectMake(scrollViewWidth * i, 0, scrollViewWidth, scrollViewHeight);
+    }
+    self.scrollView.contentSize = CGSizeMake(self.imageViewArray.count * scrollViewWidth, scrollViewHeight);
+    self.pageControl.center = CGPointMake(self.contentViewWidth * 0.5, self.contentViewHeight - 30);
+}
+
 -(void)closeButtonAction
 {
     __weak typeof(self) weakSelf = self;
@@ -291,6 +358,13 @@ typedef void (^Completion)();
     }];
 }
 
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    double page = scrollView.contentOffset.x / scrollView.frame.size.width;
+    self.pageControl.currentPage = (int)(page + 0.5);
+}
+
 #pragma mark - SuperMethod
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -312,6 +386,9 @@ typedef void (^Completion)();
         [self.textView setContentOffset:CGPointZero animated:NO];
         self.textView.frame = (CGRect){{self.textViewMargin, self.textViewMargin}, [self dl_getTextViewSize]};
         [self dl_configTextView];
+    }else if(self.scrollView){
+        self.contentView.frame = CGRectMake(self.contentViewX, -contentViewY, self.contentViewWidth,self.contentViewHeight);
+        [self dl_configScrollView];
     }
 }
 
