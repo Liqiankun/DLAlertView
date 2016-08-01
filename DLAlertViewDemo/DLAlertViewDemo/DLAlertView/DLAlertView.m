@@ -1,14 +1,15 @@
 //
-//  dlAlertView.m
-//  dlAlertView
+//  DLAlertView.m
+//  DLAlertView
 //
-//  Created by dl_David on 16/7/27.
-//  Copyright © 2016年 dl_David. All rights reserved.
+//  Created by David on 16/7/27.
+//  Copyright © 2016年 David. All rights reserved.
 //
 
 #import "DLAlertView.h"
 #import "NSString+SIZEOFSTRING.h"
 #import "UIImageView+WebCache.h"
+
 #define contentViewWidthRatio 0.76
 #define contentViewWidhtHeightRatio 0.74
 
@@ -55,6 +56,7 @@ typedef void (^Completion)();
 -(CGSize)dl_getTextViewSize;
 -(void)dl_configTextView;
 -(void)dl_configScrollView;
+
 @end
 
 @implementation DLAlertView
@@ -167,6 +169,7 @@ typedef void (^Completion)();
     for (int i = 0 ; i < images.count; i++) {
         id image = images[i];
         UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
         if ([image isKindOfClass:[NSString class]]) {
             imageView.image = [UIImage imageNamed:image];
         }else if([image isKindOfClass:[UIImage class]]){

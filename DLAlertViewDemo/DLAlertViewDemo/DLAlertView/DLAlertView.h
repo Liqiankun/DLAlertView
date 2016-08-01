@@ -1,9 +1,9 @@
 //
-//  FTAlertView.h
-//  FTAlertView
+//  DLAlertView.h
+//  DLAlertView
 //
-//  Created by FT_David on 16/7/27.
-//  Copyright © 2016年 FT_David. All rights reserved.
+//  Created by David on 16/7/27.
+//  Copyright © 2016年 David. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -17,8 +17,11 @@ typedef void(^ClickCallBack)();
 @property(nonatomic,copy)ClickCallBack clickCallBack;
 
 -(instancetype)initWithWithImage:(UIImage *)image clickCallBack:(ClickCallBack)clickCallBack andCloseCallBack:(CloseCallBack)closeCallBack;
+
 -(instancetype)initWithWithImages:(NSArray *)images clickCallBack:(ClickCallBack)clickCallBack andCloseCallBack:(CloseCallBack)closeCallBack;
+
 -(instancetype)initWithWithText:(NSString *)text font:(UIFont *)font textColor:(UIColor *)textColor clickCallBack:(ClickCallBack)clickCallBack andCloseCallBack:(CloseCallBack)closeCallBack;
+
 -(void)show;
 
 @end
