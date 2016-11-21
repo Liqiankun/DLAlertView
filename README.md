@@ -37,4 +37,4 @@ NSArray *images = @[@"01",@"02",@"03",@"04",@"05"];
 - iOS8.0(manually only) or greater
 
 #Author
-David Lee, qianlunli@yahoo.com
+David Lee, qiankunli@yahoo.com
