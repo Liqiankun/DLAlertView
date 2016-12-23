@@ -56,6 +56,7 @@ typedef void (^Completion)();
 -(CGSize)dl_getTextViewSize;
 -(void)dl_configTextView;
 -(void)dl_configScrollView;
+-(void)dl_setupSubViewsFrame;
 
 @end
 
@@ -69,6 +70,7 @@ typedef void (^Completion)();
         [self dl_setupContentView];
         [self dl_setupImageViewWithImage:image];
         [self dl_setupCloseButton];
+        [self dl_setupSubViewsFrame];
         
         self.clickCallBack = clickCallBack;
         self.closeCallBack = closeCallBack;
@@ -87,6 +89,7 @@ typedef void (^Completion)();
         [self dl_setupContentView];
         [self dl_setupScrollViewWithImages:images];
         [self dl_setupCloseButton];
+        [self dl_setupSubViewsFrame];
         
         self.clickCallBack = clickCallBack;
         self.closeCallBack = closeCallBack;
@@ -106,6 +109,7 @@ typedef void (^Completion)();
         [self dl_setupContentView];
         [self dl_setupTextViewWithText:text font:font textColor:textColor];
         [self dl_setupCloseButton];
+        [self dl_setupSubViewsFrame];
         
         self.clickCallBack = clickCallBack;
         self.closeCallBack = closeCallBack;
@@ -334,6 +338,26 @@ typedef void (^Completion)();
     self.pageControl.center = CGPointMake(self.contentViewWidth * 0.5, self.contentViewHeight - 30);
 }
 
+-(void)dl_setupSubViewsFrame
+{
+    CGFloat contentViewY = self.contentViewHeight;
+    
+    CGFloat closeButtonY = viewHeight;
+    self.closeButton.frame = CGRectMake(self.closeButtonX, closeButtonY, self.closeButtonWidthHeight, self.closeButtonWidthHeight);
+    
+    if (self.imageView) {
+        self.contentView.frame = CGRectMake(self.contentViewX, -contentViewY, self.contentViewWidth, self.contentViewHeight);
+        self.imageView.frame = self.contentView.bounds;
+    }else if(self.textView){
+        [self.textView setContentOffset:CGPointZero animated:NO];
+        self.textView.frame = (CGRect){{self.textViewMargin, self.textViewMargin}, [self dl_getTextViewSize]};
+        [self dl_configTextView];
+    }else if(self.scrollView){
+        self.contentView.frame = CGRectMake(self.contentViewX, -contentViewY, self.contentViewWidth,self.contentViewHeight);
+        [self dl_configScrollView];
+    }
+}
+
 -(void)closeButtonAction
 {
     __weak typeof(self) weakSelf = self;
@@ -374,27 +398,7 @@ typedef void (^Completion)();
     [super viewDidLoad];
 }
 
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    
-    CGFloat contentViewY = self.contentViewHeight;
 
-    CGFloat closeButtonY = viewHeight;
-    self.closeButton.frame = CGRectMake(self.closeButtonX, closeButtonY, self.closeButtonWidthHeight, self.closeButtonWidthHeight);
-    
-    if (self.imageView) {
-        self.contentView.frame = CGRectMake(self.contentViewX, -contentViewY, self.contentViewWidth, self.contentViewHeight);
-        self.imageView.frame = self.contentView.bounds;
-    }else if(self.textView){
-        [self.textView setContentOffset:CGPointZero animated:NO];
-        self.textView.frame = (CGRect){{self.textViewMargin, self.textViewMargin}, [self dl_getTextViewSize]};
-        [self dl_configTextView];
-    }else if(self.scrollView){
-        self.contentView.frame = CGRectMake(self.contentViewX, -contentViewY, self.contentViewWidth,self.contentViewHeight);
-        [self dl_configScrollView];
-    }
-}
 
 
 - (void)didReceiveMemoryWarning {
