@@ -2,6 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "01.png",
       "scale" : "1x"
     },
     {
@@ -10,7 +11,6 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "3F38E1FC-7CA5-4DB1-90BA-93B7DC0DE567.png",
       "scale" : "3x"
     }
   ],
