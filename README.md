@@ -2,13 +2,13 @@
 One simple alertView supports text,image,imgaes.<br>
 一个支持文字，图片和多张图片的弹出框。<br>
 ![](https://github.com/Liqiankun/DLAlertView/raw/master/DLAlertView.gif)
-#Features
+# Features
 - [x] Easy to use
 - [x] Support text,image,images
 - [x] 使用简单
 - [x] 同时支持文字，图片和多图
 
-#How to use
+# How to use
 ```oc
 //ImageView
    DLAlertView *alertView = [[DLAlertView alloc] initWithWithImage:[UIImage imageNamed:@"typewriter"] clickCallBack:^{
@@ -32,9 +32,9 @@ NSArray *images = @[@"01",@"02",@"03",@"04",@"05"];
     [alertView show];
 ```
 
-#Requirements
+# Requirements
 - Xcode 7.0 or greater
 - iOS8.0(manually only) or greater
 
-#Author
+# Author
 David Lee, qiankunli@yahoo.com
