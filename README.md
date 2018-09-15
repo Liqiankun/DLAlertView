@@ -9,7 +9,7 @@ One simple alertView supports text,image,imgaes.<br>
 - [x] 同时支持文字，图片和多图
 
 # How to use
-```oc
+```OC
 //ImageView
    DLAlertView *alertView = [[DLAlertView alloc] initWithWithImage:[UIImage imageNamed:@"typewriter"] clickCallBack:^{
        NSLog(@"clickCallBack");
